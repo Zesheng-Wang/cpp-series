@@ -312,3 +312,135 @@ using namespace messaging
 using messaging::greet;
 ```
 
+<div style="page-break-after:always"></div>
+
+# C++ 中级概念
+
+## 一、数组
+
+### 1、创建并初始化数组
+
+```c++
+int numbers[] = {1, 2, 3};
+string names[5];
+```
+
+ ### 2、访问数组元素
+
+```c++
+numbers[0] = 10;
+cout << numbers[0];
+```
+
+### 3、确定数组的大小
+
+```c++
+auto size = size(numbers);
+```
+
+### 4、数组解包
+
+```c++
+auto [x, y, z] = numbers;      // 新特性
+```
+
+### 5、二维数组
+
+```c++
+int matrix[2][3] = {
+    {11, 12, 13},
+    {21, 22, 23}
+};
+matrix[0][0] = 10;
+```
+
+<div style="page-break-after:always"></div>
+
+ ## 二、指针
+
+### 1、声明和使用指针
+
+```c++
+int number = 10;
+int* ptr = &number;
+*ptr = 10;
+```
+
+### 2、指向常量数据的指针
+
+```c++
+const int x = 10;
+const int* ptr = &x;
+```
+
+### 3、常量指针
+
+```c++
+int x = 10;
+int* const ptr = &x;
+```
+
+### 4、指向常量数据的常量指针
+
+```c++
+int x = 10;
+const int* const ptr = &x;
+```
+
+### 5、使用原始指针动态内存分配
+
+```c++
+int* numbers = new int[10];
+delete[] numbers;
+```
+
+### 6、使用智能指针动态内存分配
+
+```c++
+#include <memory>
+auto numbers:unique_ptr<int[]> = make_unique<int[]>(10);
+```
+
+<div style="page-break-after:always"></div>
+
+## 三、字符串
+
+### 1、使用C字符串
+
+```c++
+char name[5] = "Mosh";
+char copy[5];
+
+cout << strlen(name);           // 求解字符串长度
+
+strcpy(copy, name);             // 拷贝字符串
+
+if (strcmp(name, copy) == 0){   // 判断两个字符串是否相等
+    cout << "Equal"; 
+}
+```
+
+### 2、使用C++字符串
+
+```c++
+string name = "python入门到进阶";
+
+cout << name.length();          // 求解字符串长度
+
+string copy = name;             // 拷贝字符串
+
+if (name == copy)               // 判断字符串是否相等
+    cout << "Equal";                  
+```
+
+### 3、修改字符串
+
+```c++
+string name = "Zesheng";
+name.append(" Wang");           // 拼接字符串
+name.insert(0, "I am ");        // 在索引位置插入字符串
+name.erase(0, 2);               // 删除索引从 0 到 1 的字符
+name.clear();                   // 删除字符串中的所有字符
+name.replace(0, 2, "**");       // 将索引 0 到 1 的字符（"Ze"）替换成 "**"
+```
+
