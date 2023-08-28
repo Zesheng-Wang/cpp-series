@@ -186,7 +186,7 @@ else{
 ### 4、条件运算符
 
 ```c++
-double commission = (sales < 10'000) > .05 : .1;
+double commission = (sales < 10'000) ? .05 : .1;
 ```
 
 ### 5、switch语句
@@ -443,4 +443,261 @@ name.erase(0, 2);               // 删除索引从 0 到 1 的字符
 name.clear();                   // 删除字符串中的所有字符
 name.replace(0, 2, "**");       // 将索引 0 到 1 的字符（"Ze"）替换成 "**"
 ```
+
+### 4、查找字符串
+
+```C++
+string name = "Wzs";
+int index;
+index = name.find('a');         // 查找指定字符位置 可以传递两个参数，待搜索字符和起始搜索位置
+                                // 查找失败会返回-1
+
+index = name.rfind('a');        // 从右向左搜索字符 'a' 最后一次出现的位置。
+								// 如果没有找到字符 'a'，则返回一个特殊值 string::npos
+
+// 下面的方法是一个用于在字符串 name 中查找第一个出现在指定字符集合 ",.;" 中的任意字符的函数。
+index = name.find_first_of(",.;");
+
+// 下面的方法是一个用于在字符串 name 中查找最后一个出现在指定字符集合 ",.;" 中的任意字符的函数。
+index = name.find_last_of(",.;");
+
+
+//  下面的方法是一个用于在字符串 name 中查找第一个不属于指定字符集合 ",.;" 中的字符的函数。
+index = name.find_first_not_of(",.;");
+```
+
+### 5、提取子串
+
+```c++
+string name = "Zesheng Wang";
+string substr;
+
+substr = name.substr();         // 不提供参数则拷贝字符串
+substr = name.substr(3);        // 是一个用于从字符串 name 中提取子字符串的函数。
+substr = name.substr(3, 5);     // 从索引 3 开始的 2 个字符构成了子字符串
+```
+
+### 6、尝试使用字符
+
+```c++
+string name = "Zesheng Wang";
+bool b;
+b = isupper(name[0]);           // 判断是否是大写字符
+b = islower(name[0]);           // 判断是否是小写字符
+b = isdigit(name[0]);           // 判断是否是数字字符
+b = isalpha(name[0]);           // 判断是否是字母字符
+
+name[0] = toupper(name[0]);     // 转换为大写字母
+name[0] = tolower(name[0]);     // 转换为小写字母
+```
+
+### 7、字符串转换
+
+```c++
+string str = "10";
+int i = stoi(str);              // 字符串转换为整数
+double d = stod(str);           // 字符串转换为浮点数
+string s = to_string(10);       // 整数转换为字符串
+```
+
+### 8、转义字符
+
+```c++
+// 换行符
+string message = "Hello\nWorld"; 
+
+// 制表符
+string columns = "first\tlast";
+
+// 输出反斜杠
+string path = "c:\\folder\\file.txt";
+```
+
+### 9、原始字符串
+
+```c++
+string path = R"(c:\folder\file.txt)";
+```
+
+<div style="page-break-after:always"></div>
+
+## 四、结构体
+
+### 1、定义结构体
+
+```c++
+struct Movie
+{
+    string title = " ";
+    int releaseYear = 0;
+};
+```
+
+### 2、创建一个结构体实例
+
+```c++
+Movie movie = {"灌篮高手", 2023};
+```
+
+### 3、结构解包
+
+```c++
+auto [t, r]{movie};  // c++17之后才能使用的语法
+```
+
+### 4、结构体数组
+
+```c++
+struct Movie
+{
+    string title;
+    int releaseYear = 0;
+    bool isPopular;
+};
+
+int main()
+{
+    vector<Movie> movies;
+    Movie movie{"terminator", 1984};
+    movies.push_back(movie);
+    movies.push_back(movie);
+
+    cout << movies[0].title << endl;
+    for (Movie movie : movies)
+    {
+        cout << movie.title << endl;
+    }
+
+    return 0;
+}
+```
+
+### 5、运算符重载
+
+```c++
+bool operator==(const Movie &first, const Movie &second)
+{
+    return (first.title == second.title &&
+            first.releaseDate.year == second.releaseDate.year;
+}
+```
+
+### 6、结构体函数
+
+```c++
+#include <iostream>
+#include <iomanip>
+#include <cstring>
+#include <vector>
+
+using namespace std;
+struct Date {
+    short year = 1900;
+    short month = 1;
+    short day = 1;
+};
+
+struct Movie {
+    string title;
+    Date releaseDate;
+    bool isPopular;
+
+
+};
+
+bool operator==(const Movie &first, const Movie &second) {
+    return (first.title == second.title &&
+            first.releaseDate.year == second.releaseDate.year &&
+            first.releaseDate.month == second.releaseDate.month &&
+            first.releaseDate.day == second.releaseDate.day);
+}
+
+ostream& operator<<(ostream& stream, const Movie& movie){
+    stream << movie.title;
+    return stream;
+}
+
+Movie getMovie(){
+    return {"terminator", 1984};
+}
+
+void showMovie(Movie& movie){
+    cout << movie.title;
+}
+int main() {
+    auto movie = getMovie();
+    showMovie(movie);
+    return 0;
+}
+```
+
+### 7、结构体指针
+
+```c++
+void showMovie(Movie* movie)
+{
+    cout << movie->title;
+}
+```
+
+<div style="page-break-after:always"></div>
+
+# C++ 高级概念
+
+### 1、创建类
+
+### 2、构造函数
+
+### 3、...
+
+<div style="page-break-after:always"></div>
+
+# 常见问题解决方案
+
+### 1、反转数组
+
+![](./arra34.jpg)
+
+```c++
+// 反转数组
+#include <bits/stdc++.h>
+using namespace std;
+
+/* Function to reverse arr[] from start to end*/
+void rvereseArray(int arr[], int start, int end)
+{
+	while (start < end)
+	{
+		int temp = arr[start];
+		arr[start] = arr[end];
+		arr[end] = temp;
+		start++;
+		end--;
+	}
+}	
+
+/* 打印一个数组 */
+void printArray(int arr[], int size)
+{
+	for (int i = 0; i < size; i++)
+		cout << arr[i] << " ";
+	cout << endl;
+}
+
+int main()
+{
+	int arr[] = {1, 2, 3, 4, 5, 6};
+	int n = sizeof(arr) / sizeof(arr[0]);
+	printArray(arr, n);
+	// 函数调用
+	rvereseArray(arr, 0, n-1);
+	cout << "Reversed array is" << endl;
+	printArray(arr, n);
+	
+	return 0;
+}
+
+```
+
+
 
